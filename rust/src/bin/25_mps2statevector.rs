@@ -1,0 +1,50 @@
+use ndarray::{Array2, Array3, Ix2, Ix3, array};
+use ndarray_einsum::einsum;
+use tnqc_springschool::MapStrToAnyhowErr;
+
+// Generate statevector from MPS
+
+#[expect(clippy::cast_precision_loss)]
+fn main() -> anyhow::Result<()> {
+    // Bell state
+    println!("Bell state:");
+    let tl: Array2<f64> = array![[1.0, 0.0], [0.0, 1.0]] / 2f64.powf(0.25);
+    let tr: Array2<f64> = array![[1.0, 0.0], [0.0, 1.0]] / 2f64.powf(0.25);
+    println!("left tensor:\n{tl}");
+    println!("right tensor:\n{tr}\n");
+
+    let bell = einsum("ij,jk->ik", &[&tl, &tr])
+        .map_str_err()?
+        .into_dimensionality::<Ix2>()?;
+    let bell = bell.flatten();
+    println!("statevector:\n{bell}\n");
+
+    // GHZ state
+    let n: usize = 6;
+    println!("n={n} GHZ state:");
+    let w = 2f64.powf(1.0 / (2.0 * n as f64));
+    let tl: Array2<f64> = array![[1.0, 0.0], [0.0, 1.0]] / w;
+    let tr: Array2<f64> = array![[1.0, 0.0], [0.0, 1.0]] / w;
+    let mut t = Array3::zeros((2, 2, 2));
+    t[[0, 0, 0]] = 1.0 / w;
+    t[[1, 1, 1]] = 1.0 / w;
+    println!("left tensor:\n{tl}");
+    println!("right tensor:\n{tr}");
+    println!("middle tensors:\n{t}\n");
+
+    let mut ghz: Array2<f64> = tl;
+    for _ in 1..(n - 1) {
+        let tmp = einsum("ij,jkl->ikl", &[&ghz, &t])
+            .map_str_err()?
+            .into_dimensionality::<Ix3>()?;
+        let shape = tmp.dim();
+        ghz = tmp.into_shape_clone((shape.0 * shape.1, shape.2))?;
+    }
+    let ghz = einsum("ij,jk->ik", &[&ghz, &tr])
+        .map_str_err()?
+        .into_dimensionality::<Ix2>()?;
+    let ghz = ghz.flatten();
+    println!("statevector:\n{ghz}");
+
+    Ok(())
+}

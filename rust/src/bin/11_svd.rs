@@ -1,6 +1,6 @@
 use ndarray::{Array2, array, s};
 use ndarray_linalg::OperationNorm;
-use tn_basics::EasySVD;
+use tnqc_springschool::EasySVD;
 
 // SVD and low-rank approximation of a matrix
 

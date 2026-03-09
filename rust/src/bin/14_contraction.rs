@@ -1,7 +1,7 @@
 use ndarray::{Array, Ix2, Ix3};
 use ndarray_einsum::einsum;
 use rand::random;
-use tn_basics::MapStrToAnyhowErr;
+use tnqc_springschool::MapStrToAnyhowErr;
 
 // Tensor contraction examples
 

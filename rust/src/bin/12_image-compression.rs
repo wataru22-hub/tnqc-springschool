@@ -11,7 +11,7 @@ use plotters::{
     series::LineSeries,
     style::{BLUE, WHITE},
 };
-use tn_basics::EasySVD;
+use tnqc_springschool::EasySVD;
 
 // Compress and reconstruct grayscale images using SVD
 

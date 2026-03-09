@@ -9,33 +9,39 @@ import numpy as np
 
 def main():
     # |00>, |01>, |10>, |11>
-    ket00 = np.array([[1], [0], [0], [0]])
-    ket01 = np.array([[0], [1], [0], [0]])
-    ket10 = np.array([[0], [0], [1], [0]])
-    ket11 = np.array([[0], [0], [0], [1]])
+    ket00 = np.array([[1], [0], [0], [0]], dtype=complex)
+    ket01 = np.array([[0], [1], [0], [0]], dtype=complex)
+    ket10 = np.array([[0], [0], [1], [0]], dtype=complex)
+    ket11 = np.array([[0], [0], [0], [1]], dtype=complex)
     print(f"|00> =\n{ket00}\n")
     print(f"|01> =\n{ket01}\n")
     print(f"|10> =\n{ket10}\n")
     print(f"|11> =\n{ket11}\n")
 
-    """CX gate"""
-    CX12 = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]])
-    print(f"CX12 =\n{CX12}\n")
-    print(f"CX12|00> = {CX12 @ ket00}\n")
-    print(f"CX12|01> = {CX12 @ ket01}\n")
-    print(f"CX12|10> = {CX12 @ ket10}\n")
-    print(f"CX12|11> = {CX12 @ ket11}\n")
+    """CNOT_01 gate"""
+    CNOT_01 = np.array(
+        [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]], dtype=complex
+    )
+    print(f"CNOT_01 =\n{CNOT_01}\n")
+    print(f"CNOT_01|00> = {CNOT_01 @ ket00}\n")
+    print(f"CNOT_01|01> = {CNOT_01 @ ket01}\n")
+    print(f"CNOT_01|10> = {CNOT_01 @ ket10}\n")
+    print(f"CNOT_01|11> = {CNOT_01 @ ket11}\n")
 
-    """CX21 gate"""
-    CX21 = np.array([[1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0], [0, 1, 0, 0]])
-    print(f"CX21 =\n{CX21}\n")
-    print(f"CX21|00> = {CX21 @ ket00}\n")
-    print(f"CX21|01> = {CX21 @ ket01}\n")
-    print(f"CX21|10> = {CX21 @ ket10}\n")
-    print(f"CX21|11> = {CX21 @ ket11}\n")
+    """CNOT_12 gate"""
+    CNOT_12 = np.array(
+        [[1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0], [0, 1, 0, 0]], dtype=complex
+    )
+    print(f"CNOT_12 =\n{CNOT_12}\n")
+    print(f"CNOT_12|00> = {CNOT_12 @ ket00}\n")
+    print(f"CNOT_12|01> = {CNOT_12 @ ket01}\n")
+    print(f"CNOT_12|10> = {CNOT_12 @ ket10}\n")
+    print(f"CNOT_12|11> = {CNOT_12 @ ket11}\n")
 
     """CZ gate"""
-    CZ = np.array([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, -1]])
+    CZ = np.array(
+        [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, -1]], dtype=complex
+    )
     print(f"CZ =\n{CZ}\n")
     print(f"CZ|00> = {CZ @ ket00}\n")
     print(f"CZ|01> = {CZ @ ket01}\n")
@@ -43,7 +49,7 @@ def main():
     print(f"CZ|11> = {CZ @ ket11}\n")
 
     """Swap gate"""
-    Swap = CX12 @ CX21 @ CX12
+    Swap = CNOT_01 @ CNOT_12 @ CNOT_01
     print(f"Swap =\n{Swap}\n")
     print(f"Swap|00> = {Swap @ ket00}\n")
     print(f"Swap|01> = {Swap @ ket01}\n")

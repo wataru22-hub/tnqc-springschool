@@ -2,10 +2,10 @@
 
 - 講義資料:
   - [tnqc-1.pdf](tnqc-1.pdf): 次元の呪いと圧縮
-  - [tnqc-2.pdf](tnqc-2.pdf):
-  - [tnqc-3.pdf](tnqc-3.pdf):
-  - [tnqc-4.pdf](tnqc-4.pdf):
-  - [tnqc-5.pdf](tnqc-5.pdf):
+  - [tnqc-2.pdf](tnqc-2.pdf): 量子回路をテンソルで書く
+  - tnqc-3.pdf: MPSの時間発展
+  - tnqc-4.pdf: 大規模シミュレーション戦略
+  - tnqc-5.pdf: 応用＋アドバンス話題
 
 - [data](data): 実習で使用するデータファイル
 
@@ -19,11 +19,15 @@
     - 12_image-compression
     - 13_tensor
     - 14_contraction
-    - 5_mps2statevector
-    - 6_statevector2mps
-    - 7_tebd
-    - 8_function2qtt
-    - 9_finite-difference
+    - 21_one-qubit
+    - 22_two-qubit
+    - 23_statevector
+    - 24_statevector-tn
+    - 25_mps2statevector
+    - 26_teleportation
+    - 27_gate-teleportation
+    - 31_statevector2mps
+    - 32_tebd
 
 - Python
   - 以下、`python`ディレクトリ内での実行を想定
